@@ -96,8 +96,8 @@ class CaloriesCalculator(Calculator):
         remainder = self.limit - calories_eaten
 
         if calories_eaten < self.limit:
-            return f"Сегодня можно съесть что-нибудь ещё, но с общей \
-            калорийностью не более {remainder} кКал"
+            return f"Сегодня можно съесть что-нибудь ещё, но с общей " \
+                   f"калорийностью не более {remainder} кКал"
         else:
             return "Хватит есть!"
 
