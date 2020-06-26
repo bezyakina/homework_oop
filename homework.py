@@ -65,13 +65,15 @@ class Record:
     """
 
     def __init__(
-        self, amount, comment, date=dt.datetime.now().date(),
+        self, amount, comment, date=None,
     ):
         """Создает объект класса Record.
         """
         self.amount = amount
         self.comment = comment
-        if type(date) == str:
+        if date is None:
+            self.date = dt.datetime.now().date()
+        elif type(date) == str:
             self.date = dt.datetime.strptime(date, "%d.%m.%Y",).date()
         else:
             self.date = date
