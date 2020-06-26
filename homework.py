@@ -1,8 +1,5 @@
 import datetime as dt
 
-NOW = dt.datetime.now().date()
-WEEK_AGO = (dt.datetime.now() - dt.timedelta(days=7)).date()
-
 
 class Calculator:
     """Класс Calculator используется для хранения и записи трат или \n
@@ -37,7 +34,7 @@ class Calculator:
         """
         spent_amount = 0
         for record in self.records:
-            if record.date == NOW:
+            if record.date == dt.datetime.now().date():
                 spent_amount += record.amount
         return spent_amount
 
@@ -45,8 +42,10 @@ class Calculator:
         """Возвращает сумму трат или килокалорий за неделю.
         """
         spent_amount = 0
+        week_ago = (dt.datetime.now() - dt.timedelta(days=7)).date()
+        now = dt.datetime.now().date()
         for record in self.records:
-            if WEEK_AGO <= record.date <= NOW:
+            if week_ago <= record.date <= now:
                 spent_amount += record.amount
         return spent_amount
 
@@ -66,7 +65,7 @@ class Record:
     """
 
     def __init__(
-        self, amount, comment, date=NOW,
+        self, amount, comment, date=dt.datetime.now().date(),
     ):
         """Создает объект класса Record.
         """
@@ -96,8 +95,10 @@ class CaloriesCalculator(Calculator):
         remainder = self.limit - calories_eaten
 
         if calories_eaten < self.limit:
-            return f"Сегодня можно съесть что-нибудь ещё, но с общей " \
-                   f"калорийностью не более {remainder} кКал"
+            return (
+                f"Сегодня можно съесть что-нибудь ещё, но с общей "
+                f"калорийностью не более {remainder} кКал"
+            )
         else:
             return "Хватит есть!"
 
