@@ -75,8 +75,6 @@ class Record:
             self.date = dt.datetime.now().date()
         elif type(date) == str:
             self.date = dt.datetime.strptime(date, "%d.%m.%Y",).date()
-        else:
-            self.date = date
 
 
 class CaloriesCalculator(Calculator):
